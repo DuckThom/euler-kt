@@ -5,7 +5,7 @@ import kotlin.math.sqrt
 // Finished!
 // Run to see the solution
 
-fun generatePrimesSieve(limit: Int): BooleanArray {
+fun generatePrimesSieve(limit: Int): List<Int> {
     val numbers = BooleanArray(limit) { true }
 
     numbers[0] = false
@@ -19,16 +19,13 @@ fun generatePrimesSieve(limit: Int): BooleanArray {
         }
     }
 
-    return numbers
+    return numbers.indices.filter { i -> numbers[i] }
 }
 
 fun main(args: Array<String>) {
     val primes = generatePrimesSieve(2000000)
 
-    var solution: Long = 0
-    primes.forEachIndexed {
-        index, value -> if (value) solution += index
-    }
+    var solution = primes.sumOf { i -> i.toLong() }
 
     println("Solution: $solution")
 }
